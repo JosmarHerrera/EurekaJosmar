@@ -17,7 +17,7 @@ FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
 # Copiar el JAR generado
-COPY --from=build /app/target/*.jar eureka-server.jar
+COPY --from=build /app/target/*.jar EurekaJosmar.jar
 
 EXPOSE 8761
 
