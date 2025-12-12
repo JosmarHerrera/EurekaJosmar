@@ -11,14 +11,14 @@ RUN mvn -q dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# ========= Etapa 2: Imagen ligera final =========
+# Etapa 2: Imagen ligera final
 FROM eclipse-temurin:17-jre-jammy
-
 WORKDIR /app
 
-# Copiar el JAR generado
-COPY --from=build /app/target/*.jar EurekaJosmar.jar
+COPY --from=build /app/target/*.jar app.jar
 
+# Railway inyecta PORT
+ENV PORT=8761
 EXPOSE 8761
 
-ENTRYPOINT ["java", "-jar", "eureka-server.jar"]
+ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${PORT} --server.address=0.0.0.0"]
