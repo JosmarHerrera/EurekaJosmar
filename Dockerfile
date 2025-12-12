@@ -18,6 +18,6 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Railway inyecta PORT
-EXPOSE 8761
+EXPOSE 8080
 
 ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${PORT} --server.address=0.0.0.0"]
